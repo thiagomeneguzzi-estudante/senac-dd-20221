@@ -1,4 +1,4 @@
-package model.entity;
+package main.java.model;
 
 public class Endereco {
 
