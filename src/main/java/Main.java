@@ -1,7 +1,7 @@
 
-import model.Cliente;
-import model.Endereco;
-import model.Telefone;
+import model.entity.Cliente;
+import model.entity.Endereco;
+import model.entity.Telefone;
 
 import java.util.ArrayList;
 
