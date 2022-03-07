@@ -1,8 +1,7 @@
-package main.java;
 
-import main.java.model.Cliente;
-import main.java.model.Endereco;
-import main.java.model.Telefone;
+import model.Cliente;
+import model.Endereco;
+import model.Telefone;
 
 import java.util.ArrayList;
 
