@@ -15,12 +15,8 @@
                     <target>8</target>
                 </configuration>
             </plugin>
-        </plugins>
-    </build>
+        </plugins>    </build>
     <packaging>jar</packaging>
-
-    <name>crud</name>
-    <url>http://maven.apache.org</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

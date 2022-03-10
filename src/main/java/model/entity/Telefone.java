@@ -5,9 +5,10 @@ public class Telefone {
     public static int TIPO_FIXO = 1;
     public static int TIPO_MOVEL = 2;
 
-    private int numero;
-    private int ddd;
-    private int ddi;
+    private int id;
+    private String numero;
+    private String ddd;
+    private String ddi;
     private int tipo;
     private boolean ativo;
 
@@ -17,7 +18,7 @@ public class Telefone {
         this.ativo = false;
     }
 
-    public Telefone(int numero, int ddd, int ddi, int tipo, boolean ativo) {
+    public Telefone(String numero, String ddd, String ddi, int tipo, boolean ativo) {
         super();
         this.numero = numero;
         this.ddd = ddd;
@@ -26,27 +27,35 @@ public class Telefone {
         this.ativo = ativo;
     }
 
-    public int getNumero() {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 
-    public int getDdd() {
+    public String getDdd() {
         return ddd;
     }
 
-    public void setDdd(int ddd) {
+    public void setDdd(String ddd) {
         this.ddd = ddd;
     }
 
-    public int getDdi() {
+    public String getDdi() {
         return ddi;
     }
 
-    public void setDdi(int ddi) {
+    public void setDdi(String ddi) {
         this.ddi = ddi;
     }
 
