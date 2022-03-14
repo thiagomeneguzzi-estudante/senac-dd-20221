@@ -1,8 +1,8 @@
 
-import model.dao.EnderecoDAO;
 import model.dao.TelefoneDAO;
-import model.entity.Endereco;
 import model.entity.Telefone;
+
+import java.util.ArrayList;
 
 public class Main {
 
@@ -20,9 +20,11 @@ public class Main {
 //        ArrayList<Endereco> enderecos = enderecoDAO.buscarTodos();
 //        System.out.println(enderecos);
 
-        Telefone telefone = new Telefone("991857390", "48", "55", 1, true);
-        TelefoneDAO telefoneDAO = new TelefoneDAO();
-        telefoneDAO.criar(telefone);
+//        Telefone telefone = new Telefone("99188192", "51", "332", 1, false);
+//        TelefoneDAO telefoneDAO = new TelefoneDAO();
+//        telefoneDAO.criar(telefone);
+//        telefoneDAO.remover(1);
+
 
     }
 }

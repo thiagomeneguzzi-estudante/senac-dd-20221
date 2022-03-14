@@ -2,11 +2,8 @@ package model.dao;
 
 import model.entity.Telefone;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.List;
+import java.sql.*;
+import java.util.ArrayList;
 
 public class TelefoneDAO {
 
@@ -32,28 +29,124 @@ public class TelefoneDAO {
             }
 
         } catch (SQLException error) {
-            System.out.println("Erro ao inserir telefone no TelefoneDAO: "+ error.getMessage());
+            System.out.println("Erro ao inserir telefone: "+ error.getMessage());
         }
         return novoTelefone;
     }
 
-    public boolean atualizar(Telefone novoTelefone) {
+    public boolean atualizar(Telefone telefone) {
+        Connection conexao = Banco.getConnection();
+        String sql = "UPDATE TELEFONE SET DDD = ?, NUMERO = ?, TIPO = ?, ATIVO = ?, DDI = ? " +
+                "WHERE ID = "+ telefone.getId();
+        PreparedStatement pstmt = Banco.getPreparedStatement(conexao, sql);
 
-        return false;
+        boolean retorno = false;
+        try {
+            assert pstmt != null;
+
+            pstmt.setString(1, telefone.getDdd());
+            pstmt.setString(2, telefone.getNumero());
+            pstmt.setInt(3, telefone.getTipo());
+            pstmt.setBoolean(4, telefone.isAtivo());
+            pstmt.setString(5, telefone.getDdi());
+
+            if (pstmt.executeUpdate() > 0) {
+                retorno = true;
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao atualizar telefone: "+ e.getMessage());
+        } finally {
+            Banco.closeStatement(pstmt);
+            Banco.closeConnection(conexao);
+        }
+
+        return retorno;
     }
 
-    public boolean remover(Telefone novoTelefone) {
+    public boolean remover(int idTelefone) {
+        Connection conexao = Banco.getConnection();
+        String sql = "DELETE FROM TELEFONE WHERE id = "+idTelefone;
+        Statement stmt = Banco.getStatement(conexao);
 
-        return false;
+        boolean retorno = false;
+
+        try {
+            assert stmt != null;
+            if (stmt.executeUpdate(sql) == 1) {
+                retorno = true;
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao remover telefone: "+ e.getMessage());
+
+        } finally {
+            Banco.closeStatement(stmt);
+            Banco.closeConnection(conexao);
+        }
+
+        return retorno;
     }
 
-    public Telefone buscarPorId(int id) {
+    public Telefone buscarPorId(int idTelefone) {
+        Connection conexao = Banco.getConnection();
+        String sql = "SELECT * FROM TELEFONE WHERE ID = "+ idTelefone;
+        Statement stmt = Banco.getStatement(conexao);
 
-        return null;
+        Telefone telefone = new Telefone();
+
+        try {
+            assert stmt != null;
+            ResultSet resultado = stmt.executeQuery(sql);
+            if(resultado.next()) {
+                telefone.setId(idTelefone);
+                telefone.setDdd(resultado.getString(2));
+                telefone.setNumero(resultado.getString(3));
+                telefone.setTipo(resultado.getInt(4));
+                telefone.setAtivo(resultado.getBoolean(5));
+                telefone.setDdi(resultado.getString(6));
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao buscar telefone por id: "+ e.getMessage());
+        } finally {
+            Banco.closeStatement(stmt);
+            Banco.closeConnection(conexao);
+        }
+
+        return telefone;
     }
 
-    public List<Telefone> buscarTodos() {
+    public ArrayList<Telefone> buscarTodos() {
+        Connection conexao = Banco.getConnection();
+        String sql = "SELECT * FROM TELEFONE";
+        Statement stmt = Banco.getStatement(conexao);
 
-        return null;
+        ArrayList<Telefone> telefones = new ArrayList<Telefone>();
+
+        try {
+            assert stmt != null;
+            ResultSet resultado = stmt.executeQuery(sql);
+            while(resultado.next()) {
+                Telefone telefone = new Telefone();
+
+                telefone.setId(resultado.getInt(1));
+                telefone.setDdd(resultado.getString(2));
+                telefone.setNumero(resultado.getString(3));
+                telefone.setTipo(resultado.getInt(4));
+                telefone.setAtivo(resultado.getBoolean(5));
+                telefone.setDdi(resultado.getString(6));
+
+                telefones.add(telefone);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao buscar todos os telefones: "+ e.getMessage());
+        } finally {
+            Banco.closeStatement(stmt);
+            Banco.closeConnection(conexao);
+        }
+
+        return telefones;
     }
 }
