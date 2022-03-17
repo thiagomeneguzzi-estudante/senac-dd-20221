@@ -7,13 +7,13 @@ public class Cliente {
     private int id;
     private String nome;
     private String cpf;
-    private List<Telefone> telefones;
+    private List<LinhaTelefonica> linhas;
     private Endereco endereco;
 
-    public Cliente(String nome, String cpf, List<Telefone> telefones, Endereco endereco) {
+    public Cliente(String nome, String cpf, List<LinhaTelefonica> linhas, Endereco endereco) {
         this.nome = nome;
         this.cpf = cpf;
-        this.telefones = telefones;
+        this.linhas = linhas;
         this.endereco = endereco;
     }
 
@@ -45,12 +45,12 @@ public class Cliente {
         this.cpf = cpf;
     }
 
-    public List<Telefone> getTelefones() {
-        return telefones;
+    public List<LinhaTelefonica> getLinhas() {
+        return linhas;
     }
 
-    public void setTelefones(List<Telefone> telefones) {
-        this.telefones = telefones;
+    public void setLinhas(List<LinhaTelefonica> linhas) {
+        this.linhas = linhas;
     }
 
     public Endereco getEndereco() {
@@ -64,9 +64,10 @@ public class Cliente {
     @Override
     public String toString() {
         return "Cliente{" +
-                "nome='" + nome + '\'' +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
                 ", cpf='" + cpf + '\'' +
-                ", telefones=" + telefones +
+                ", linhas=" + linhas +
                 ", endereco=" + endereco +
                 '}';
     }

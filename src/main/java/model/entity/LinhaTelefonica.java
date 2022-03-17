@@ -5,17 +5,18 @@ import java.time.LocalDateTime;
 public class LinhaTelefonica {
 
     private int id;
-    private Telefone telefone;
+    private int idTelefone;
     private int idCliente;
     private LocalDateTime dataAtivacao;
     private LocalDateTime dataDesativacao;
 
-    public LinhaTelefonica(int id, Telefone telefone, int idCliente, LocalDateTime dataAtivacao, LocalDateTime dataDesativacao) {
-        this.id = id;
-        this.telefone = telefone;
+    public LinhaTelefonica(int idTelefone, int idCliente) {
+        this.idTelefone = idTelefone;
         this.idCliente = idCliente;
-        this.dataAtivacao = dataAtivacao;
-        this.dataDesativacao = dataDesativacao;
+    }
+
+    public LinhaTelefonica() {
+        super();
     }
 
     public int getId() {
@@ -26,12 +27,12 @@ public class LinhaTelefonica {
         this.id = id;
     }
 
-    public Telefone getTelefone() {
-        return telefone;
+    public int getIdTelefone() {
+        return idTelefone;
     }
 
-    public void setTelefone(Telefone telefone) {
-        this.telefone = telefone;
+    public void setIdTelefone(int idTelefone) {
+        this.idTelefone = idTelefone;
     }
 
     public int getIdCliente() {
@@ -56,5 +57,16 @@ public class LinhaTelefonica {
 
     public void setDataDesativacao(LocalDateTime dataDesativacao) {
         this.dataDesativacao = dataDesativacao;
+    }
+
+    @Override
+    public String toString() {
+        return "LinhaTelefonica{" +
+                "id=" + id +
+                ", idTelefone=" + idTelefone +
+                ", idCliente=" + idCliente +
+                ", dataAtivacao=" + dataAtivacao +
+                ", dataDesativacao=" + dataDesativacao +
+                '}';
     }
 }
