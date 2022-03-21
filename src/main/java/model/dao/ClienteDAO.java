@@ -145,4 +145,29 @@ public class ClienteDAO {
 
         return clientes;
     }
+
+    public boolean verificarCPF(String cpf) {
+        boolean retorno = false;
+        Connection conexao = Banco.getConnection();
+        String sql = "SELECT count(ID) FROM CLIENTE where cpf = ?";
+
+        PreparedStatement stmt = Banco.getPreparedStatement(conexao, sql);
+
+
+        try {
+            stmt.setString(1, cpf);
+            ResultSet resultado = stmt.executeQuery();
+            if(resultado.next()) {
+                retorno = resultado.getInt(1) > 0;
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao buscar todos os clientes: "+ e.getMessage());
+        } finally {
+            Banco.closeStatement(stmt);
+            Banco.closeConnection(conexao);
+        }
+
+        return retorno;
+    }
 }

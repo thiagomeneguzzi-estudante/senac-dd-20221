@@ -1,52 +1,57 @@
-
+import controller.ClienteController;
+import controller.EnderecoController;
 import model.dao.ClienteDAO;
 import model.dao.EnderecoDAO;
-import model.dao.LinhaTelefonicaDAO;
-import model.dao.TelefoneDAO;
 import model.entity.Cliente;
 import model.entity.Endereco;
-import model.entity.LinhaTelefonica;
-import model.entity.Telefone;
+import views.NovoCliente;
 
+import javax.swing.*;
 import java.util.ArrayList;
 
 public class Main {
 
     public static void main(String[] args) {
 
-//        Endereco endereco = new Endereco("Mauro Ramos", "88047655", "SC", "Florianópolis", 268);
-//        EnderecoDAO enderecoDAO = new EnderecoDAO();
-//        Endereco enderecoAdicionado = enderecoDAO.criar(endereco);
-//
-//        Cliente cliente = new Cliente("Thiago", "11481764977", null, enderecoAdicionado);
-//        ClienteDAO clienteDAO = new ClienteDAO();
-//        Cliente clienteCriado = clienteDAO.criar(cliente);
-//        System.out.println(clienteCriado);
-//        clienteAdded.setNome("Leonardo");
-//        boolean removeu = clienteDAO.remover(1);
-//        System.out.println(removeu);
+        NovoCliente.showScreen();
 
-//        endereco.setCidade("Florianópolis");
-//        endereco.setId(2);
-//        boolean atualizou = enderecoDAO.atualizar(endereco);
-//        System.out.println(atualizou);
-//        boolean atualizou = enderecoDAO.remover(1);
-//        System.out.println(atualizou);
-//        ArrayList<Endereco> enderecos = enderecoDAO.buscarTodos();
-//        System.out.println(enderecos);
-
-//        Telefone telefone = new Telefone("99188192", "51", "332", 1, false);
-//        TelefoneDAO telefoneDAO = new TelefoneDAO();
-//        telefoneDAO.criar(telefone);
-//        telefoneDAO.remover(1);
-
-//        LinhaTelefonica linha = new LinhaTelefonica(3, 2);
-        LinhaTelefonicaDAO linhaDAO = new LinhaTelefonicaDAO();
-//        linhaDAO.criar(linha);
-
-//        ArrayList<Telefone> telefones = linhaDAO.buscarLinhasPorCliente(2);
-//        System.out.println(telefones);
-        boolean desativou = linhaDAO.desativarLinhaTelefonica(4);
-        System.out.println(desativou);
     }
+
+    private static void testarCadastroClienteComJOptionPane() {
+        EnderecoController enderecoController = new EnderecoController();
+        ClienteController clienteController = new ClienteController();
+        ArrayList<Endereco> enderecos;
+
+        enderecos = enderecoController.buscarTodos();
+
+        String name = JOptionPane.showInputDialog(null, "Digite o nome do cliente: ", "Cadastro de cliente", JOptionPane.QUESTION_MESSAGE);
+        String cpf = JOptionPane.showInputDialog(null, "Digite o cpf do cliente: ", "Cadastro de cliente", JOptionPane.QUESTION_MESSAGE);
+        Endereco endereco = (Endereco) JOptionPane.showInputDialog(null, "Selecione o endereço", "Cadastro de cliente", JOptionPane.QUESTION_MESSAGE, null, enderecos.toArray(), null);
+
+        Cliente novoCliente = new Cliente(name, cpf, null, endereco);
+        String mensagem = clienteController.criar(novoCliente);
+
+        JOptionPane.showMessageDialog(null, mensagem, "Cadastro de cliente", JOptionPane.INFORMATION_MESSAGE);
+
+    }
+
+    private static void testarCadastroDeEndereco() {
+        String rua = JOptionPane.showInputDialog(null, "Digite a rua: ", "Cadastro de endereço", JOptionPane.QUESTION_MESSAGE);
+        String cep = JOptionPane.showInputDialog(null, "Digite a cep: ", "Cadastro de endereço", JOptionPane.QUESTION_MESSAGE);
+        String uf = JOptionPane.showInputDialog(null, "Digite a uf: ", "Cadastro de endereço", JOptionPane.QUESTION_MESSAGE);
+        String cidade = JOptionPane.showInputDialog(null, "Digite a cidade: ", "Cadastro de endereço", JOptionPane.QUESTION_MESSAGE);
+        String numero = JOptionPane.showInputDialog(null, "Digite a numero: ", "Cadastro de endereço", JOptionPane.QUESTION_MESSAGE);
+
+        Endereco endereco = new Endereco(rua, cep, uf, cidade, Integer.parseInt(numero));
+        EnderecoDAO enderecoDAO = new EnderecoDAO();
+        Endereco enderecoCriado = enderecoDAO.criar(endereco);
+
+        if(enderecoCriado.getId() > 0) {
+            JOptionPane.showMessageDialog(null, "Adicionado com sucesso", "Cadastro de endereço", JOptionPane.INFORMATION_MESSAGE);
+        } else  {
+            JOptionPane.showMessageDialog(null, "Erro ao adicionar endereço", "Cadastro de endereço", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+
 }
