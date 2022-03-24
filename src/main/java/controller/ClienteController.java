@@ -3,11 +3,13 @@ package controller;
 import model.bo.ClienteBO;
 import model.entity.Cliente;
 
+import java.util.ArrayList;
+
 public class ClienteController {
 
-    public String criar(Cliente cliente) {
-        ClienteBO clienteBO = new ClienteBO();
+    static final ClienteBO clienteBO = new ClienteBO();
 
+    public String criar(Cliente cliente) {
         String mensagem = "";
         if(cliente == null) {
             mensagem = "Informe todos os dados do novo cliente";
@@ -24,5 +26,13 @@ public class ClienteController {
 
 
         return mensagem;
+    }
+
+    public ArrayList<Cliente> buscarTodos() {
+        return clienteBO.buscarTodos();
+    }
+
+    public boolean remover(int id) {
+        return clienteBO.remover(id);
     }
 }

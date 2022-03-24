@@ -2,8 +2,11 @@ import controller.ClienteController;
 import controller.EnderecoController;
 import model.dao.ClienteDAO;
 import model.dao.EnderecoDAO;
+import model.dao.LinhaTelefonicaDAO;
 import model.entity.Cliente;
 import model.entity.Endereco;
+import model.entity.LinhaTelefonica;
+import views.DeletarCliente;
 import views.NovoCliente;
 
 import javax.swing.*;
@@ -12,9 +15,7 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args) {
-
-        NovoCliente.showScreen();
-
+        DeletarCliente.showScreen();
     }
 
     private static void testarCadastroClienteComJOptionPane() {

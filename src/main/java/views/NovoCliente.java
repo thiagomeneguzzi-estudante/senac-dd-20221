@@ -13,9 +13,6 @@ public class NovoCliente extends JFrame {
     public NovoCliente() {
         setContentPane(panel);
         setSize(350, 250);
-
-        comboBoxEnderecos.set
-
         button1.addActionListener(e -> {
 
         });

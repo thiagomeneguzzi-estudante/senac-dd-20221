@@ -1,0 +1,10 @@
+
+N	java:S106"9Replace this use of System.out or System.err by a logger.(¡©œÃ
+N	java:S106="9Replace this use of System.out or System.err by a logger.(Ø¬
+S	java:S106Z"9Replace this use of System.out or System.err by a logger.(ıà½·úÿÿÿÿ
+S	java:S106{"9Replace this use of System.out or System.err by a logger.(ıà½·úÿÿÿÿ
+O	java:S106’"9Replace this use of System.out or System.err by a logger.(Ø¬
+o
+java:S2293h"YReplace the type specification in this constructor call with the diamond operator ("<>").(‡¨·
+†
+java:S1319c"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(Ú¸¡

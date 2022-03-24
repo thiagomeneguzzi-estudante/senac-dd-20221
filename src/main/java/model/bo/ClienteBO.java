@@ -3,6 +3,8 @@ package model.bo;
 import model.dao.ClienteDAO;
 import model.entity.Cliente;
 
+import java.util.ArrayList;
+
 public class ClienteBO {
 
     public ClienteDAO clienteDAO = new ClienteDAO();
@@ -24,4 +26,11 @@ public class ClienteBO {
         return mensagem;
     }
 
+    public ArrayList<Cliente> buscarTodos() {
+        return clienteDAO.buscarTodos();
+    }
+
+    public boolean remover(int id) {
+        return clienteDAO.remover(id);
+    }
 }

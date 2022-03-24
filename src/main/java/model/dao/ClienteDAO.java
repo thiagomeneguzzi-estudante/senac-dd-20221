@@ -70,10 +70,13 @@ public class ClienteDAO {
         boolean retorno = false;
 
         try {
-            assert stmt != null;
-            if (stmt.executeUpdate(sql) == 1) {
-                retorno = true;
+            if(!verificarLinhasAtivas(idCliente)) {
+                assert stmt != null;
+                if (stmt.executeUpdate(sql) == 1) {
+                    retorno = true;
+                }
             }
+
 
         } catch (SQLException e) {
             System.out.println("Erro ao remover cliente: "+ e.getMessage());
@@ -83,6 +86,30 @@ public class ClienteDAO {
             Banco.closeConnection(conexao);
         }
 
+        return retorno;
+    }
+
+    private boolean verificarLinhasAtivas(int idCliente) {
+        Connection conexao = Banco.getConnection();
+        String sql = "SELECT count(*) FROM LINHA_TELEFONICA WHERE idCliente = "+idCliente;
+        Statement stmt = Banco.getStatement(conexao);
+
+        boolean retorno = false;
+        try {
+
+            ResultSet resultado = stmt.executeQuery(sql);
+            if(resultado.next()) {
+                retorno = resultado.getInt(1) > 0;
+            }
+
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao verificar linhas ativas de cliente: "+ e.getMessage());
+
+        } finally {
+            Banco.closeStatement(stmt);
+            Banco.closeConnection(conexao);
+        }
         return retorno;
     }
 
