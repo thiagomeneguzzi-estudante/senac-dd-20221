@@ -1,8 +1,6 @@
 package model.dao;
 
 import model.entity.Cliente;
-import model.entity.Endereco;
-import model.entity.Telefone;
 
 import java.sql.*;
 import java.util.ArrayList;

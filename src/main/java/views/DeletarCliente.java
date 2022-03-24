@@ -41,7 +41,7 @@ public class DeletarCliente extends JFrame {
     public static void showScreen() {
         DeletarCliente deletarCliente = new DeletarCliente();
         deletarCliente.setLocationRelativeTo(null);
-        deletarCliente.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        deletarCliente.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         deletarCliente.setVisible(true);
     }
 

@@ -7,6 +7,7 @@ import model.entity.Cliente;
 import model.entity.Endereco;
 import model.entity.LinhaTelefonica;
 import views.DeletarCliente;
+import views.ListarClientes;
 import views.NovoCliente;
 
 import javax.swing.*;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args) {
-        DeletarCliente.showScreen();
+        ListarClientes.showScreen();
     }
 
     private static void testarCadastroClienteComJOptionPane() {
