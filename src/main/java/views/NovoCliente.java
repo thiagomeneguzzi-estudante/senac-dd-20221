@@ -6,7 +6,6 @@ import model.entity.Cliente;
 import model.entity.Endereco;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 
 public class NovoCliente extends JFrame {

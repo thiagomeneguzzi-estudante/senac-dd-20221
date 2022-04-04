@@ -1,0 +1,6 @@
+
+’
+java:S1319"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(²º»¦ùÿÿÿÿ8šÝðÝû/
+q
+java:S1104
+"VMake clienteDAO a static final constant or non-public and provide accessors if needed.(°¸˜Ãþÿÿÿÿ
