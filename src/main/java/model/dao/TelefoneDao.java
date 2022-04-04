@@ -149,4 +149,29 @@ public class TelefoneDAO {
 
         return telefones;
     }
+
+    public boolean isActive(int idTelefone) {
+        Connection conexao = Banco.getConnection();
+        String sql = "SELECT count(*) FROM TELEFONE WHERE ID = "+idTelefone+" and ativo = true";
+        Statement stmt = Banco.getStatement(conexao);
+
+        boolean retorno = false;
+
+        try {
+            ResultSet result = stmt.executeQuery(sql);
+            if (result.next()) {
+                retorno = result.getInt(1) > 0;
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao verificar se linha telefônica está ativa: "+ e.getMessage());
+
+        } finally {
+            Banco.closeStatement(stmt);
+            Banco.closeConnection(conexao);
+        }
+
+        return retorno;
+    }
+
 }

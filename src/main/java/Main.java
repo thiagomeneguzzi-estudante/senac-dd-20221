@@ -1,10 +1,10 @@
 
-import views.ClientsList;
+import views.AssociateClientWithPhone;
 
 public class Main {
 
     public static void main(String[] args) {
-        ClientsList.showScreen();
+        AssociateClientWithPhone.showScreen();
     }
 
 }

@@ -77,12 +77,6 @@ public class Telefone {
 
     @Override
     public String toString() {
-        return "Telefone{" +
-                "numero=" + numero +
-                ", ddd=" + ddd +
-                ", ddi=" + ddi +
-                ", tipo=" + tipo +
-                ", ativo=" + ativo +
-                '}';
+        return "{"+numero+" - ativo: "+ ativo+ "}";
     }
 }

@@ -4,6 +4,7 @@ import model.entity.Cliente;
 import model.entity.LinhaTelefonica;
 import model.entity.Telefone;
 
+import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -13,6 +14,8 @@ public class LinhaTelefonicaDAO {
         Connection conexao = Banco.getConnection();
         String sql = "INSERT INTO LINHA_TELEFONICA (IDTELEFONE, IDCLIENTE, DATAATIVACAO, DATADESATIVACAO) VALUES (?, ?, now(), null)";
         PreparedStatement pstmt = Banco.getPreparedStatementWithPk(conexao, sql);
+
+        String mensagem = "";
 
         try {
             pstmt.setInt(1, linha.getIdTelefone());
@@ -24,6 +27,7 @@ public class LinhaTelefonicaDAO {
 
             if(resultado.next()) {
                 linha.setId(resultado.getInt(1));
+                turnPhoneActive(linha.getIdTelefone());
             }
         } catch (SQLException error) {
             System.out.println("Erro ao criar linha telefonica: "+ error.getMessage());
@@ -32,9 +36,9 @@ public class LinhaTelefonicaDAO {
         return linha;
     }
 
-    public boolean desativarLinhaTelefonica(int idLinha) {
+    public boolean desativarLinhaTelefonica(int idTelefone) {
         Connection conexao = Banco.getConnection();
-        String sql = "UPDATE LINHA_TELEFONICA SET DATADESATIVACAO = now() WHERE id = "+idLinha;
+        String sql = "UPDATE LINHA_TELEFONICA SET DATADESATIVACAO = now() WHERE idtelefone = "+idTelefone+" and DATADESATIVACAO is null";
         Statement stmt = Banco.getStatement(conexao);
 
         boolean retorno = false;
@@ -43,6 +47,7 @@ public class LinhaTelefonicaDAO {
             assert stmt != null;
             if (stmt.executeUpdate(sql) == 1) {
                 retorno = true;
+                turnPhoneDisabled(idTelefone);
             }
 
         } catch (SQLException e) {
@@ -81,6 +86,40 @@ public class LinhaTelefonicaDAO {
         }
 
         return telefones;
+    }
+
+    private void turnPhoneActive(int idTelefone) {
+        Connection conexao = Banco.getConnection();
+        String sql = "UPDATE TELEFONE SET ATIVO = TRUE WHERE ID = "+idTelefone;
+        Statement stmt = Banco.getStatement(conexao);
+
+        try {
+            stmt.executeUpdate(sql);
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao ativar telefone: "+ e.getMessage());
+
+        } finally {
+            Banco.closeStatement(stmt);
+            Banco.closeConnection(conexao);
+        }
+    }
+
+    private void turnPhoneDisabled(int idTelefone) {
+        Connection conexao = Banco.getConnection();
+        String sql = "UPDATE TELEFONE SET ATIVO = FALSE WHERE ID = "+idTelefone;
+        Statement stmt = Banco.getStatement(conexao);
+
+        try {
+            stmt.executeUpdate(sql);
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao ativar telefone: "+ e.getMessage());
+
+        } finally {
+            Banco.closeStatement(stmt);
+            Banco.closeConnection(conexao);
+        }
     }
 
 }
