@@ -5,14 +5,19 @@ import java.awt.*;
 
 public class MainView extends JFrame{
 
-    private JTabbedPane mainTabs;
     private JPanel mainPanel;
+    private JButton clientList;
+    private JButton addressList;
+    private JButton phoneLine;
 
     MainView() {
         setContentPane(mainPanel);
         setSize(550, 350);
         setMinimumSize(new Dimension(550, 250));
 
+        clientList.addActionListener(e -> ClientsList.showScreen());
+        addressList.addActionListener(e -> Enderecos.showScreen());
+        phoneLine.addActionListener(e -> AssociateClientWithPhone.showScreen());
     }
 
     public static void showScreen() {

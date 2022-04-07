@@ -43,7 +43,6 @@ public class ClientsList extends JFrame{
     public static void showScreen() {
         ClientsList clientsList = new ClientsList();
         clientsList.setLocationRelativeTo(null);
-        clientsList.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         clientsList.setVisible(true);
     }
 

@@ -1,11 +1,9 @@
-
-import model.dao.LinhaTelefonicaDAO;
-import views.AssociateClientWithPhone;
+import views.MainView;
 
 public class Main {
 
     public static void main(String[] args) {
-        AssociateClientWithPhone.showScreen();
+        MainView.showScreen();
 //        System.out.println(new LinhaTelefonicaDAO().getClientIdByPhoneId(2));
     }
 

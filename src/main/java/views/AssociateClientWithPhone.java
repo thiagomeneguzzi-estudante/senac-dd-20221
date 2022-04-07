@@ -26,10 +26,7 @@ public class AssociateClientWithPhone extends JFrame{
         setContentPane(panel);
         setSize(750, 250);
 
-        searchClients();
-        searchPhones();
-        clearLineButton.setEnabled(false);
-        associateButton.setEnabled(false);
+        updateData();
 
         associateButton.addActionListener(e -> criarLinha());
         phoneComboBox.addActionListener(e -> verifyIsActive());
@@ -40,22 +37,26 @@ public class AssociateClientWithPhone extends JFrame{
         Telefone telefone = (Telefone) phoneComboBox.getSelectedItem();
         String message = linhaTelefonicaController.desativarLinha(telefone.getId());
         JOptionPane.showMessageDialog(null, message, "Criar linha telefonica", JOptionPane.INFORMATION_MESSAGE);
+        updateData();
     }
 
     private void verifyIsActive() {
         Telefone telefone = (Telefone) phoneComboBox.getSelectedItem();
-        boolean isActive = telefone.isAtivo();
-        int clientId = linhaTelefonicaController.getClientIdByPhoneId(telefone.getId());
-        if(isActive && clientId > 0) {
-            for (Cliente cliente: clientes) {
-                if(cliente.getId() == clientId) {
-                    clientComboBox.setSelectedItem(cliente);
+        if(telefone != null) {
+            boolean isActive = telefone.isAtivo();
+            int clientId = linhaTelefonicaController.getClientIdByPhoneId(telefone.getId());
+            if(isActive && clientId > 0) {
+                for (Cliente cliente: clientes) {
+                    if(cliente.getId() == clientId) {
+                        clientComboBox.setSelectedItem(cliente);
+                    }
                 }
             }
+            clientComboBox.setEnabled(!isActive);
+            clearLineButton.setEnabled(isActive);
+            associateButton.setEnabled(!isActive);
         }
-        clientComboBox.setEnabled(!isActive);
-        clearLineButton.setEnabled(isActive);
-        associateButton.setEnabled(!isActive);
+
     }
 
     private void criarLinha() {
@@ -65,10 +66,19 @@ public class AssociateClientWithPhone extends JFrame{
         linhaTelefonica.setIdTelefone(telefone.getId());
         String message = linhaTelefonicaController.criar(linhaTelefonica);
         JOptionPane.showMessageDialog(null, message, "Criar linha telefonica", JOptionPane.INFORMATION_MESSAGE);
+        updateData();
+    }
+
+    private void updateData() {
+        searchPhones();
+        searchClients();
+        clearLineButton.setEnabled(false);
+        associateButton.setEnabled(false);
     }
 
     private void searchPhones() {
         TelefoneController telefoneController = new TelefoneController();
+        phoneComboBox.removeAllItems();
         telefones = telefoneController.buscarTodos();
 
         for (Telefone telefone : telefones) {
@@ -79,6 +89,7 @@ public class AssociateClientWithPhone extends JFrame{
 
     private void searchClients() {
         ClienteController clienteController = new ClienteController();
+        clientComboBox.removeAllItems();
         clientes = clienteController.buscarTodos();
 
         for (Cliente cliente : clientes) {
@@ -91,7 +102,7 @@ public class AssociateClientWithPhone extends JFrame{
     public static void showScreen() {
         AssociateClientWithPhone associateClientWithPhone = new AssociateClientWithPhone();
         associateClientWithPhone.setLocationRelativeTo(null);
-        associateClientWithPhone.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         associateClientWithPhone.setVisible(true);
     }
+
 }
