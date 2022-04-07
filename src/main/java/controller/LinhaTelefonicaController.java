@@ -16,4 +16,8 @@ public class LinhaTelefonicaController {
         return desactivated ? "Linha telefonica desativada!" : "Erro ao desativar linha telefonica";
     }
 
+    public int getClientIdByPhoneId(int phoneId) {
+        return linhaTelefonicaBO.getClientIdByPhoneId(phoneId);
+    }
+
 }

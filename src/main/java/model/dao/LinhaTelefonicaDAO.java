@@ -88,6 +88,29 @@ public class LinhaTelefonicaDAO {
         return telefones;
     }
 
+    public int getClientIdByPhoneId(int phoneId) {
+        Connection conexao = Banco.getConnection();
+        String sql = "SELECT IDCLIENTE FROM LINHA_TELEFONICA WHERE IDTELEFONE = "+phoneId+" && DATADESATIVACAO is null";
+        Statement stmt = Banco.getStatement(conexao);
+        int clientId = 0;
+
+        try {
+            assert stmt != null;
+            ResultSet resultado = stmt.executeQuery(sql);
+            if(resultado.next()) {
+                clientId = resultado.getInt(1);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao buscar todos os clientes: "+ e.getMessage());
+        } finally {
+            Banco.closeStatement(stmt);
+            Banco.closeConnection(conexao);
+        }
+
+        return clientId;
+    }
+
     private void turnPhoneActive(int idTelefone) {
         Connection conexao = Banco.getConnection();
         String sql = "UPDATE TELEFONE SET ATIVO = TRUE WHERE ID = "+idTelefone;

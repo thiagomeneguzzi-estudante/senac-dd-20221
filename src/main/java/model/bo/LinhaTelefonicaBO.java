@@ -13,4 +13,8 @@ public class LinhaTelefonicaBO {
     public boolean desativarLinha(int idTelefone) {
         return linhaTelefonicaDAO.desativarLinhaTelefonica(idTelefone);
     }
+
+    public int getClientIdByPhoneId(int phoneId) {
+        return linhaTelefonicaDAO.getClientIdByPhoneId(phoneId);
+    }
 }

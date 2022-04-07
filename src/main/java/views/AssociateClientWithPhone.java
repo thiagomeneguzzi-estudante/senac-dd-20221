@@ -18,6 +18,8 @@ public class AssociateClientWithPhone extends JFrame{
     private JPanel panel;
     static LinhaTelefonicaController linhaTelefonicaController = new LinhaTelefonicaController();
     static LinhaTelefonica linhaTelefonica = new LinhaTelefonica();
+    ArrayList<Telefone> telefones = new ArrayList<Telefone>();
+    ArrayList<Cliente> clientes = new ArrayList<Cliente>();
 
     AssociateClientWithPhone() {
 
@@ -26,7 +28,8 @@ public class AssociateClientWithPhone extends JFrame{
 
         searchClients();
         searchPhones();
-        verifyIsActive();
+        clearLineButton.setEnabled(false);
+        associateButton.setEnabled(false);
 
         associateButton.addActionListener(e -> criarLinha());
         phoneComboBox.addActionListener(e -> verifyIsActive());
@@ -42,6 +45,15 @@ public class AssociateClientWithPhone extends JFrame{
     private void verifyIsActive() {
         Telefone telefone = (Telefone) phoneComboBox.getSelectedItem();
         boolean isActive = telefone.isAtivo();
+        int clientId = linhaTelefonicaController.getClientIdByPhoneId(telefone.getId());
+        if(isActive && clientId > 0) {
+            for (Cliente cliente: clientes) {
+                if(cliente.getId() == clientId) {
+                    clientComboBox.setSelectedItem(cliente);
+                }
+            }
+        }
+        clientComboBox.setEnabled(!isActive);
         clearLineButton.setEnabled(isActive);
         associateButton.setEnabled(!isActive);
     }
@@ -57,20 +69,22 @@ public class AssociateClientWithPhone extends JFrame{
 
     private void searchPhones() {
         TelefoneController telefoneController = new TelefoneController();
-        ArrayList<Telefone> telefones = telefoneController.buscarTodos();
+        telefones = telefoneController.buscarTodos();
 
         for (Telefone telefone : telefones) {
             phoneComboBox.addItem(telefone);
         }
+        phoneComboBox.setSelectedIndex(-1);
     }
 
     private void searchClients() {
         ClienteController clienteController = new ClienteController();
-        ArrayList<Cliente> clientes = clienteController.buscarTodos();
+        clientes = clienteController.buscarTodos();
 
         for (Cliente cliente : clientes) {
             clientComboBox.addItem(cliente);
         }
+        clientComboBox.setSelectedIndex(-1);
     }
 
 
