@@ -16,7 +16,7 @@ public class MainView extends JFrame{
         setMinimumSize(new Dimension(550, 250));
 
         clientList.addActionListener(e -> ClientsList.showScreen());
-        addressList.addActionListener(e -> Enderecos.showScreen());
+        addressList.addActionListener(e -> AddressList.showScreen());
         phoneLine.addActionListener(e -> AssociateClientWithPhone.showScreen());
     }
 

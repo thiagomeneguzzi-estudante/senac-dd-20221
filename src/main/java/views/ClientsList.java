@@ -9,7 +9,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class ClientsList extends JFrame{
-    private JTable table1;
+    private JTable clientTable;
     private JButton addButton;
     private JButton deleteButton;
     private JButton refreshTableButton;
@@ -19,7 +19,7 @@ public class ClientsList extends JFrame{
         setContentPane(jpanel);
         setSize(550, 350);
         setMinimumSize(new Dimension(550, 250));
-        table1.setEnabled(false);
+        clientTable.setEnabled(false);
 
         criarLista();
 
@@ -32,7 +32,7 @@ public class ClientsList extends JFrame{
         ClienteController clienteController = new ClienteController();
         ArrayList<Cliente> clientes = clienteController.buscarTodos();
         DefaultTableModel tableModel = new DefaultTableModel(new String[]{"ID", "Nome", "CPF"}, 0);
-        table1.setModel(tableModel);
+        clientTable.setModel(tableModel);
         tableModel.addRow(new Object[]{"ID", "Nome", "CPF"});
 
         for (Cliente cliente: clientes) {

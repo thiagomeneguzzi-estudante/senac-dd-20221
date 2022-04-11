@@ -3,12 +3,8 @@ W
 'src/main/java/views/DeletarCliente.form,b\b\bbafed8fff8790e88d5cd65afdb799572d6d4f25
 X
 (src/main/java/model/entity/Endereco.java,b\c\bc9941556230a8f8480efa5659803873841ca0c2
-R
-"src/main/java/views/Enderecos.form,2\8\28a06442f930c339dfa97bdfffaac3e389e68c16
 T
 $src/main/java/views/NovoCliente.form,9\b\9b8a7f59265bc1288647a33f37e265c14606f7d6
-T
-$src/main/java/views/ClientsList.form,7\0\7065368d19522ef44bde919a36f19eae79b0d5a5
 W
 'src/main/java/model/entity/Cliente.java,d\3\d3a030eced404c146911b8f79635d25c9cf02eca
 _
@@ -35,3 +31,13 @@ U
 0src/main/java/controller/EnderecoController.java,d\f\dfb92689d639c9ab54e644b565af78ad3866852f
 _
 /src/main/java/controller/ClienteController.java,2\d\2dd0ea23c04feaa8a65bcbe10634ff41d0f6dfa7
+a
+1src/main/java/views/AssociateClientWithPhone.form,a\6\a60dae1ba9267d385b9c477716e74d0efaa03012
+]
+-src/main/java/model/bo/LinhaTelefonicaBO.java,8\5\857e4e8abded7095a9eed7cc45d59a090ee194a2
+_
+/src/main/java/model/dao/LinhaTelefonicaDAO.java,5\c\5c5d9c1b61027090c63304faa456a0338ec4dd61
+W
+'src/main/java/model/dao/ClienteDAO.java,2\f\2febce2a7b159421cd10259dfb1a5729b86ffb47
+g
+7src/main/java/controller/LinhaTelefonicaController.java,4\b\4b88131501610369d57895c9c769c5532e33c786

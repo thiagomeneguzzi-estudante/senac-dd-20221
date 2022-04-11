@@ -1,0 +1,17 @@
+
+H
+java:S1481"-Remove this unused "mensagem" local variable.(ØºÂÒüÿÿÿÿ
+N	java:S106!"9Replace this use of System.out or System.err by a logger.(´ş£ğ
+S	java:S1066"9Replace this use of System.out or System.err by a logger.(ˆé¿ÿÿÿÿÿ
+S	java:S106R"9Replace this use of System.out or System.err by a logger.(ñ¸ıÎûÿÿÿÿ
+S	java:S106i"9Replace this use of System.out or System.err by a logger.(†êÙüÿÿÿÿ
+S	java:S106{"9Replace this use of System.out or System.err by a logger.(„Ùòúÿÿÿÿ
+T	java:S106Œ"9Replace this use of System.out or System.err by a logger.(„Ùòúÿÿÿÿ
+S
+java:S1128"1Remove this unused import 'model.entity.Cliente'.(æ¢Ñıÿÿÿÿ8„Ü—€0
+Y
+java:S1128"7Remove this unused import 'javax.xml.transform.Result'.(âÓ¸ûÿÿÿÿ8…Ü—€0
+o
+java:S2293E"YReplace the type specification in this constructor call with the diamond operator ("<>").(»ºí˜
+‹
+java:S1319@"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(–ÚŒùÿÿÿÿ
