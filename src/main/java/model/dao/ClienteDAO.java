@@ -171,6 +171,37 @@ public class ClienteDAO {
         return clientes;
     }
 
+    public Cliente buscarClientePorCPF(String cpf) {
+        Connection conexao = Banco.getConnection();
+        String sql = "select * from cliente where cpf = "+ cpf;
+
+        PreparedStatement stmt = Banco.getPreparedStatement(conexao, sql);
+
+        Cliente cliente = new Cliente();
+        EnderecoDAO enderecoDAO = new EnderecoDAO();
+
+
+
+        try {
+            assert stmt != null;
+            ResultSet resultado = stmt.executeQuery(sql);
+            if(resultado.next()) {
+                cliente.setId(resultado.getInt(1));
+                cliente.setNome(resultado.getString(2));
+                cliente.setCpf(resultado.getString(3));
+                cliente.setEndereco(enderecoDAO.buscarUnico(resultado.getInt(4)));
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao buscar cliente por cpf: "+ e.getMessage());
+        } finally {
+            Banco.closeStatement(stmt);
+            Banco.closeConnection(conexao);
+        }
+
+        return cliente;
+    }
+
     public boolean verificarCPF(String cpf) {
         boolean retorno = false;
         Connection conexao = Banco.getConnection();
