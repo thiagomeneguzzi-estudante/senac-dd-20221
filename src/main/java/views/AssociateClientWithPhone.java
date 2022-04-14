@@ -10,7 +10,7 @@ import model.entity.Telefone;
 import javax.swing.*;
 import java.util.ArrayList;
 
-public class AssociateClientWithPhone extends JFrame{
+public class AssociateClientWithPhone extends JPanel{
     private JComboBox clientComboBox;
     private JComboBox phoneComboBox;
     private JButton associateButton;
@@ -23,7 +23,7 @@ public class AssociateClientWithPhone extends JFrame{
 
     AssociateClientWithPhone() {
 
-        setContentPane(panel);
+        add(panel);
         setSize(750, 250);
 
         updateData();
@@ -96,13 +96,6 @@ public class AssociateClientWithPhone extends JFrame{
             clientComboBox.addItem(cliente);
         }
         clientComboBox.setSelectedIndex(-1);
-    }
-
-
-    public static void showScreen() {
-        AssociateClientWithPhone associateClientWithPhone = new AssociateClientWithPhone();
-        associateClientWithPhone.setLocationRelativeTo(null);
-        associateClientWithPhone.setVisible(true);
     }
 
 }

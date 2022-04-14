@@ -8,7 +8,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class ClientsList extends JFrame{
+public class ClientsList extends JPanel{
     private JTable clientTable;
     private JButton addButton;
     private JButton deleteButton;
@@ -16,7 +16,7 @@ public class ClientsList extends JFrame{
     private JPanel jpanel;
 
     ClientsList() {
-        setContentPane(jpanel);
+        add(jpanel);
         setSize(550, 350);
         setMinimumSize(new Dimension(550, 250));
         clientTable.setEnabled(false);
@@ -40,14 +40,4 @@ public class ClientsList extends JFrame{
         }
     }
 
-    public static void showScreen() {
-        ClientsList clientsList = new ClientsList();
-        clientsList.setLocationRelativeTo(null);
-        clientsList.setVisible(true);
-    }
-
-    public static void dismissScreen() {
-        ClientsList clientsList = new ClientsList();
-        clientsList.dispose();
-    }
 }

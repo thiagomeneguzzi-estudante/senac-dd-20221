@@ -10,7 +10,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class AddressList extends JFrame{
+public class AddressList extends JPanel{
     private JPanel panel1;
     private JTable addressTable;
     private JButton deleteButton;
@@ -18,7 +18,7 @@ public class AddressList extends JFrame{
     private JButton refreshTableButton;
 
     public AddressList() {
-        setContentPane(panel1);
+        add(panel1);
         setSize(550, 350);
         setMinimumSize(new Dimension(550, 250));
         addressTable.setEnabled(false);
@@ -42,14 +42,4 @@ public class AddressList extends JFrame{
         }
     }
 
-    public static void showScreen() {
-        AddressList addressList = new AddressList();
-        addressList.setLocationRelativeTo(null);
-        addressList.setVisible(true);
-    }
-
-    public static void dismissScreen() {
-        AddressList addressList = new AddressList();
-        addressList.dispose();
-    }
 }
