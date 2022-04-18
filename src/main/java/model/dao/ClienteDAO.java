@@ -34,6 +34,7 @@ public class ClienteDAO {
 
     public boolean atualizar(Cliente cliente) {
         Connection conexao = Banco.getConnection();
+        System.out.println(cliente.getId());
         String sql = "UPDATE CLIENTE SET NOME = ?, CPF = ?, IDENDERECO = ? " +
                 "WHERE ID = "+ cliente.getId();
         PreparedStatement pstmt = Banco.getPreparedStatement(conexao, sql);
@@ -41,12 +42,13 @@ public class ClienteDAO {
         boolean retorno = false;
         try {
             assert pstmt != null;
-
+            System.out.println("oi");
             pstmt.setString(1, cliente.getNome());
             pstmt.setString(2, cliente.getCpf());
             pstmt.setInt(3, cliente.getEndereco().getId());
 
             if (pstmt.executeUpdate() > 0) {
+                System.out.println("oi2");
                 retorno = true;
             }
 
@@ -56,7 +58,7 @@ public class ClienteDAO {
             Banco.closeStatement(pstmt);
             Banco.closeConnection(conexao);
         }
-
+        System.out.println(retorno);
         return retorno;
     }
 

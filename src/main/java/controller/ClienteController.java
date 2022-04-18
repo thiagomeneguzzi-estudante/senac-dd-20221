@@ -32,7 +32,30 @@ public class ClienteController {
         return clienteBO.buscarTodos();
     }
 
+    public Cliente buscarClientePorCPF(String cpf) {
+        return clienteBO.buscarClientePorCPF(cpf);
+    }
+
     public boolean remover(int id) {
         return clienteBO.remover(id);
+    }
+
+    public String editar(Cliente cliente, String actualCpf) {
+        String mensagem = "";
+        if(cliente == null) {
+            mensagem = "Informe todos os dados do novo cliente";
+        } else if(cliente.getCpf().trim().length() != 11) {
+            try{
+                Long.parseLong(cliente.getCpf());
+            } catch(NumberFormatException exception) {
+                mensagem = "CPF deve ter somente números";
+            }
+            mensagem += "CPF deve conter 11 dígitos.";
+        } else {
+            mensagem = clienteBO.editar(cliente, actualCpf);
+        }
+
+
+        return mensagem;
     }
 }

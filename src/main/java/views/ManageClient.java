@@ -13,7 +13,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
-public class NovoCliente extends JFrame {
+public class ManageClient extends JFrame {
 
     private JTextField nome;
     private JTextField cpf;
@@ -21,26 +21,41 @@ public class NovoCliente extends JFrame {
     private JButton button1;
     private JPanel panel;
 
+    private static Cliente clientEdit;
+
     EnderecoController enderecoController = new EnderecoController();
     ArrayList<Endereco> enderecos = enderecoController.buscarTodos();
+    Cliente cliente = new Cliente();
+    ClienteController clienteController = new ClienteController();
 
-    public NovoCliente() {
+    public ManageClient(Cliente clientToEdit) {
         setContentPane(panel);
         setSize(750, 250);
         buscarEnderecos();
 
         comboBoxEnderecos.setSelectedIndex(-1);
 
-
         button1.addActionListener(e -> {
-            Cliente cliente = new Cliente();
-            ClienteController clienteController = new ClienteController();
-            cliente.setNome(nome.getText());
-            cliente.setCpf(cpf.getText());
-            cliente.setEndereco((Endereco) comboBoxEnderecos.getSelectedItem());
-            String mensagem = clienteController.criar(cliente);
-            JOptionPane.showMessageDialog(null, mensagem, "Adicionar cliente", JOptionPane.INFORMATION_MESSAGE);
-            clearClientForm();
+            if(clientToEdit != null) {
+                cliente.setId(clientToEdit.getId());
+                cliente.setNome(nome.getText());
+                cliente.setCpf(cpf.getText());
+                cliente.setEndereco((Endereco) comboBoxEnderecos.getSelectedItem());
+                String mensagem = clienteController.editar(cliente, clientToEdit.getCpf());
+                JOptionPane.showMessageDialog(null, mensagem, "Editar cliente", JOptionPane.INFORMATION_MESSAGE);
+                if(mensagem.equals("Cliente atualizado com sucesso!")) {
+                    clearClientForm();
+                    dispose();
+                }
+            } else {
+                cliente.setNome(nome.getText());
+                cliente.setCpf(cpf.getText());
+                cliente.setEndereco((Endereco) comboBoxEnderecos.getSelectedItem());
+                String mensagem = clienteController.criar(cliente);
+                JOptionPane.showMessageDialog(null, mensagem, "Adicionar cliente", JOptionPane.INFORMATION_MESSAGE);
+                clearClientForm();
+            }
+
         });
 
         cpf.addFocusListener(new FocusAdapter() {
@@ -48,8 +63,7 @@ public class NovoCliente extends JFrame {
             public void focusLost(FocusEvent e) {
                 super.focusLost(e);
                 String insertedCPF = cpf.getText();
-                ClienteDAO clienteDAO = new ClienteDAO();
-                Cliente cliente = clienteDAO.buscarClientePorCPF(insertedCPF);
+                Cliente cliente = clienteController.buscarClientePorCPF(insertedCPF);
                 if(cliente.getId() != 0) {
                     nome.setText(cliente.getNome());
                     for (int i = 0; i < enderecos.toArray().length; i++) {
@@ -57,8 +71,6 @@ public class NovoCliente extends JFrame {
                             comboBoxEnderecos.setSelectedIndex(i);
                         }
                     }
-                } else {
-                    clearClientForm();
                 }
             }
         });
@@ -83,6 +95,18 @@ public class NovoCliente extends JFrame {
 
             }
         });
+
+        showScreen(clientToEdit);
+    }
+
+    private void setEditableClient(Cliente clientToEdit) {
+        nome.setText(clientToEdit.getNome());
+        cpf.setText(clientToEdit.getCpf());
+        for (int i = 0; i < enderecos.toArray().length; i++) {
+            if(enderecos.get(i).getId() == clientToEdit.getEndereco().getId()) {
+                comboBoxEnderecos.setSelectedIndex(i);
+            }
+        }
     }
 
     private void clearClientForm() {
@@ -97,10 +121,12 @@ public class NovoCliente extends JFrame {
         }
     }
 
-    public static void showScreen(){
-        NovoCliente cliente = new NovoCliente();
-        cliente.setLocationRelativeTo(null);
-        cliente.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        cliente.setVisible(true);
+    public void showScreen(Cliente clientToEdit){
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        if(clientToEdit != null) {
+            setEditableClient(clientToEdit);
+        }
+        this.setVisible(true);
     }
 }

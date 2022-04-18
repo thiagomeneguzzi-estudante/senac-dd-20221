@@ -8,17 +8,18 @@ import java.util.ArrayList;
 
 public class DeletarCliente extends JFrame {
     private static final ClienteController clienteController = new ClienteController();
-
+    ArrayList<Cliente> clientes = new ArrayList<Cliente>();
     private JComboBox comboBox1;
     private JButton button1;
     private JPanel panel1;
 
 
-    public DeletarCliente() {
+    public DeletarCliente(Cliente clientFromRow) {
         setContentPane(panel1);
         setSize(350, 200);
 
         buscarTodosClientes();
+        setSelectedClient(clientFromRow);
 
         button1.addActionListener(e -> {
             boolean removed = clienteController.remover(Integer.parseInt(((comboBox1.getSelectedItem().toString().split("-")[0]).trim())));
@@ -29,20 +30,29 @@ public class DeletarCliente extends JFrame {
                 JOptionPane.showMessageDialog(null, "Usuário possui linha telefônica ativa", "Deletar cliente", JOptionPane.ERROR_MESSAGE);
             }
         });
+
+        showScreen();
     }
 
     private void buscarTodosClientes() {
-        ArrayList<Cliente> clientes = clienteController.buscarTodos();
+        clientes = clienteController.buscarTodos();
         for (Cliente cliente : clientes) {
             comboBox1.addItem(cliente.getId()+" - "+cliente.getNome());
         }
     }
 
-    public static void showScreen() {
-        DeletarCliente deletarCliente = new DeletarCliente();
-        deletarCliente.setLocationRelativeTo(null);
-        deletarCliente.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        deletarCliente.setVisible(true);
+    private void setSelectedClient(Cliente clientFromRow) {
+        for (int i = 0; i < clientes.toArray().length; i++) {
+            if(clientes.get(i).getId() == clientFromRow.getId()) {
+                comboBox1.setSelectedIndex(i);
+            }
+        }
+    }
+
+    public void showScreen() {
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        this.setVisible(true);
     }
 
 }
