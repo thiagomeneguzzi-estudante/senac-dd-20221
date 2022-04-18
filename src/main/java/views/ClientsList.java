@@ -8,18 +8,19 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class ClientsList extends JPanel{
+public class ClientsList extends JFrame{
     private JTable clientTable;
     private JButton addButton;
     private JButton deleteButton;
     private JButton refreshTableButton;
     private JPanel jpanel;
+    private JButton editarButton;
 
     ClientsList() {
-        add(jpanel);
+        setContentPane(jpanel);
         setSize(550, 350);
         setMinimumSize(new Dimension(550, 250));
-        clientTable.setEnabled(false);
+//        clientTable.setEnabled(false);
 
         criarLista();
 
@@ -38,6 +39,13 @@ public class ClientsList extends JPanel{
         for (Cliente cliente: clientes) {
             tableModel.addRow(new Object[]{(cliente.getId()), (cliente.getNome()), (cliente.getCpf())});
         }
+    }
+
+    public static void showScreen() {
+        ClientsList clientsList = new ClientsList();
+        clientsList.setLocationRelativeTo(null);
+        clientsList.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        clientsList.setVisible(true);
     }
 
 }
