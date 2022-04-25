@@ -1,4 +1,3 @@
-import views.ClientsList;
 import views.MainView;
 
 public class Main {

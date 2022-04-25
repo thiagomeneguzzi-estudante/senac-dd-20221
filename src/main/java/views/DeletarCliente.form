@@ -35,7 +35,7 @@
           </grid>
         </constraints>
         <properties>
-          <text value="Button"/>
+          <text value="Deletar"/>
         </properties>
       </component>
       <component id="bf896" class="javax.swing.JComboBox" binding="comboBox1" default-binding="true">

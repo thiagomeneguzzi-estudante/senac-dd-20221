@@ -91,7 +91,7 @@ public class ClienteDAO {
 
     private boolean verificarLinhasAtivas(int idCliente) {
         Connection conexao = Banco.getConnection();
-        String sql = "SELECT count(*) FROM LINHA_TELEFONICA WHERE idCliente = "+idCliente;
+        String sql = "SELECT count(*) FROM LINHA_TELEFONICA WHERE idCliente = "+idCliente +" and DATADESATIVACAO is null";
         Statement stmt = Banco.getStatement(conexao);
 
         boolean retorno = false;
