@@ -12,17 +12,11 @@ _
 X
 (src/main/java/model/entity/Telefone.java,7\f\7f2e2a674cb18aab2d5be3426f087e741a761879
 X
-(src/main/java/model/dao/TelefoneDAO.java,a\7\a79530a9ba46cecef0b78f16376c0a48a5c3ae76
-X
 (src/main/java/model/dao/EnderecoDAO.java,0\a\0a34050aae44e842c9d80d4abf453fc8d47901ce
 R
 "src/main/java/model/dao/Banco.java,5\c\5c48acefab9f2c692698ed90396d08c0495c450e
 V
-&src/main/java/model/bo/TelefoneBO.java,3\c\3c640a2589981da0eef84535d64ade10205fe8dd
-V
 &src/main/java/model/bo/EnderecoBO.java,0\e\0ef6b37bae384b73e4419f16a8961970086cf480
-`
-0src/main/java/controller/TelefoneController.java,f\5\f569462628cb4b7540b01db8e061c9c8bcba38f9
 `
 0src/main/java/controller/EnderecoController.java,d\f\dfb92689d639c9ab54e644b565af78ad3866852f
 _

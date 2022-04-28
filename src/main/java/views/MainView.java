@@ -2,12 +2,15 @@ package views;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class MainView extends JFrame {
     private JPanel mainPanel;
     private JButton clientsListButton;
     private JButton addressListButton;
     private JButton manageLinesButton;
+    private JButton gerenciarTelefonesButton;
 
     MainView() {
         setContentPane(mainPanel);
@@ -16,6 +19,7 @@ public class MainView extends JFrame {
         clientsListButton.addActionListener(e -> ClientsList.showScreen());
         addressListButton.addActionListener(e -> AddressList.showScreen());
         manageLinesButton.addActionListener(e -> AssociateClientWithPhone.showScreen());
+        gerenciarTelefonesButton.addActionListener(e -> PhonesList.showScreen());
     }
 
     public static void showScreen() {

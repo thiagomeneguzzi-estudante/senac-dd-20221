@@ -11,53 +11,62 @@ import java.util.ArrayList;
 
 public class ClientsList extends JFrame{
     private JTable clientTable;
-    private JButton addButton;
-    private JButton deleteButton;
+    private JButton addClientButton;
+    private JButton deleteClientButton;
     private JButton refreshTableButton;
     private JPanel jpanel;
-    private JButton editarButton;
+    private JButton editClientButton;
 
-    ClienteController clienteController = new ClienteController();
-    ArrayList<Cliente> clientes = new ArrayList<Cliente>();
+    private static final ClienteController clienteController = new ClienteController();
+    private ArrayList<Cliente> clientes;
 
     ClientsList() {
         setContentPane(jpanel);
         setSize(550, 350);
         setMinimumSize(new Dimension(550, 250));
         clientTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        editarButton.setEnabled(false);
-        deleteButton.setEnabled(false);
+        editClientButton.setEnabled(false);
+        deleteClientButton.setEnabled(false);
 
-        criarLista();
+        buildClientsList();
 
-        addButton.addActionListener(e -> {
-            new ManageClient(null);
-        });
-        deleteButton.addActionListener(e -> {
-            new DeletarCliente(getClientFromRow(clientTable.getSelectedRow()));
-        });
-        editarButton.addActionListener(e -> {
-            new ManageClient(getClientFromRow(clientTable.getSelectedRow()));
-        });
-        refreshTableButton.addActionListener(e -> criarLista());
+        addClientButton.addActionListener(e -> addNewClient());
+        deleteClientButton.addActionListener(e -> deleteClient());
+        editClientButton.addActionListener(e -> editClient());
+        refreshTableButton.addActionListener(e -> buildClientsList());
 
         clientTable.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                if(clientTable.getSelectedRow() != 0) {
-                    editarButton.setEnabled(true);
-                    deleteButton.setEnabled(true);
-                } else {
-                    editarButton.setEnabled(false);
-                    deleteButton.setEnabled(false);
-                }
-
+                verifyRowToEnableEditAndDeleteButtons();
             }
         });
     }
 
-    private void criarLista() {
+    private void editClient() {
+        new ManageClient(getClientFromRow(clientTable.getSelectedRow()));
+    }
+
+    private void deleteClient() {
+        new DeletarCliente(getClientFromRow(clientTable.getSelectedRow()));
+    }
+
+    private void addNewClient() {
+        new ManageClient(null);
+    }
+
+    private void verifyRowToEnableEditAndDeleteButtons() {
+        if(clientTable.getSelectedRow() != 0) {
+            editClientButton.setEnabled(true);
+            deleteClientButton.setEnabled(true);
+        } else {
+            editClientButton.setEnabled(false);
+            deleteClientButton.setEnabled(false);
+        }
+    }
+
+    private void buildClientsList() {
         clientes = clienteController.buscarTodos();
         DefaultTableModel tableModel = new DefaultTableModel(new String[]{"ID", "Nome", "CPF"}, 0);
         clientTable.setModel(tableModel);

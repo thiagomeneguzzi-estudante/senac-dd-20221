@@ -11,9 +11,10 @@ import java.util.ArrayList;
 public class AddressList extends JFrame {
     private JPanel panel1;
     private JTable addressTable;
-    private JButton deleteButton;
-    private JButton addButton;
+    private JButton deleteAddressButton;
+    private JButton addAddressButton;
     private JButton refreshTableButton;
+    private JButton editAddressButton;
 
     public AddressList() {
         setContentPane(panel1);
@@ -23,9 +24,22 @@ public class AddressList extends JFrame {
 
         criarLista();
 
-//        addButton.addActionListener(e -> );
-//        deleteButton.addActionListener(e -> );
+        addAddressButton.addActionListener(e -> addNewAddress());
+        deleteAddressButton.addActionListener(e -> deleteAddress());
+        editAddressButton.addActionListener(e -> editAddress());
         refreshTableButton.addActionListener(e -> criarLista());
+    }
+
+    private void addNewAddress() {
+        JOptionPane.showMessageDialog(null, "Método ainda não implementado", "Informação", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    private void deleteAddress() {
+        JOptionPane.showMessageDialog(null, "Método ainda não implementado", "Informação", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    private void editAddress() {
+        JOptionPane.showMessageDialog(null, "Método ainda não implementado", "Informação", JOptionPane.INFORMATION_MESSAGE);
     }
 
     private void criarLista() {
