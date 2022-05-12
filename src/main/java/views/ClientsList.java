@@ -5,11 +5,10 @@ import model.entity.Cliente;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
-public class ClientsList extends JFrame{
+public class ClientsList extends JPanel {
     private JTable clientTable;
     private JButton addClientButton;
     private JButton deleteClientButton;
@@ -21,43 +20,28 @@ public class ClientsList extends JFrame{
     private ArrayList<Cliente> clientes;
 
     ClientsList() {
-        setContentPane(jpanel);
-        setSize(550, 350);
-        setMinimumSize(new Dimension(550, 250));
+        add(jpanel);
+
         clientTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         editClientButton.setEnabled(false);
         deleteClientButton.setEnabled(false);
 
         buildClientsList();
 
-        addClientButton.addActionListener(e -> addNewClient());
-        deleteClientButton.addActionListener(e -> deleteClient());
-        editClientButton.addActionListener(e -> editClient());
+        deleteClientButton.addActionListener(e -> removeClient());
         refreshTableButton.addActionListener(e -> buildClientsList());
-
         clientTable.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                System.out.println(clientTable.getSelectedRow());
                 verifyRowToEnableEditAndDeleteButtons();
             }
         });
     }
 
-    private void editClient() {
-        new ManageClient(getClientFromRow(clientTable.getSelectedRow()));
-    }
-
-    private void deleteClient() {
-        new DeletarCliente(getClientFromRow(clientTable.getSelectedRow()));
-    }
-
-    private void addNewClient() {
-        new ManageClient(null);
-    }
-
     private void verifyRowToEnableEditAndDeleteButtons() {
-        if(clientTable.getSelectedRow() != 0) {
+        if(clientTable.getSelectedRow() >= 0) {
             editClientButton.setEnabled(true);
             deleteClientButton.setEnabled(true);
         } else {
@@ -70,7 +54,6 @@ public class ClientsList extends JFrame{
         clientes = clienteController.buscarTodos();
         DefaultTableModel tableModel = new DefaultTableModel(new String[]{"ID", "Nome", "CPF"}, 0);
         clientTable.setModel(tableModel);
-        tableModel.addRow(new Object[]{"ID", "Nome", "CPF"});
 
         for (Cliente cliente: clientes) {
             tableModel.addRow(new Object[]{(cliente.getId()), (cliente.getNome()), (cliente.getCpf())});
@@ -78,14 +61,28 @@ public class ClientsList extends JFrame{
     }
 
     private Cliente getClientFromRow(int index) {
-        return clientes.get(index-1);
+        return clientes.get(index);
     }
 
-    public static void showScreen() {
-        ClientsList clientsList = new ClientsList();
-        clientsList.setLocationRelativeTo(null);
-        clientsList.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        clientsList.setVisible(true);
+    public void removeClient() {
+        Cliente cliente = getSelectedClient();
+        int option = JOptionPane.showConfirmDialog(null, "Deseja realmente deletar este cliente?", "Deletar cliente", JOptionPane.YES_NO_OPTION);
+        if(option == 0) {
+            String message = clienteController.remover(cliente.getId());
+            JOptionPane.showMessageDialog(null, message, "Deletar cliente", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+
+    public JButton getEditClientButton() {
+        return editClientButton;
+    }
+
+    public Cliente getSelectedClient() {
+        return getClientFromRow(clientTable.getSelectedRow());
+    }
+
+    public JButton getAddClientButton() {
+        return addClientButton;
     }
 
 }

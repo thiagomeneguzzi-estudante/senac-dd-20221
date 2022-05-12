@@ -1,6 +1,5 @@
 package model.bo;
 
-import model.dao.EnderecoDAO;
 import model.dao.TelefoneDAO;
 import model.entity.Telefone;
 

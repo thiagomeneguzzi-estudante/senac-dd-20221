@@ -8,7 +8,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class AddressList extends JFrame {
+public class AddressList extends JPanel {
     private JPanel panel1;
     private JTable addressTable;
     private JButton deleteAddressButton;
@@ -17,9 +17,7 @@ public class AddressList extends JFrame {
     private JButton editAddressButton;
 
     public AddressList() {
-        setContentPane(panel1);
-        setSize(550, 350);
-        setMinimumSize(new Dimension(550, 250));
+        add(panel1);
         addressTable.setEnabled(false);
 
         criarLista();
@@ -47,18 +45,10 @@ public class AddressList extends JFrame {
         ArrayList<Endereco> enderecos = enderecoController.buscarTodos();
         DefaultTableModel tableModel = new DefaultTableModel(new String[]{"ID", "Rua", "CEP", "Cidade", "UF"}, 0);
         addressTable.setModel(tableModel);
-        tableModel.addRow(new Object[]{"ID", "Rua", "CEP", "Cidade", "UF"});
 
         for (Endereco endereco: enderecos) {
             tableModel.addRow(new Object[]{(endereco.getId()), (endereco.getRua()), (endereco.getCep()), (endereco.getCidade()), (endereco.getUf())});
         }
-    }
-
-    public static void showScreen() {
-        AddressList addressList = new AddressList();
-        addressList.setLocationRelativeTo(null);
-        addressList.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        addressList.setVisible(true);
     }
 
 }

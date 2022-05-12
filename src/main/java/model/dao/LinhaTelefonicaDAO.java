@@ -1,10 +1,8 @@
 package model.dao;
 
-import model.entity.Cliente;
 import model.entity.LinhaTelefonica;
 import model.entity.Telefone;
 
-import javax.xml.transform.Result;
 import java.sql.*;
 import java.util.ArrayList;
 

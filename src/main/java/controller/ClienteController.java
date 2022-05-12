@@ -36,8 +36,15 @@ public class ClienteController {
         return clienteBO.buscarClientePorCPF(cpf);
     }
 
-    public boolean remover(int id) {
-        return clienteBO.remover(id);
+    public String remover(int id) {
+        String message = "";
+        boolean removed = clienteBO.remover(id);
+        if(removed) {
+            message = "Cliente removido com sucesso";
+        } else {
+            message = "Usuário possui linha telefônica ativa";
+        }
+        return message;
     }
 
     public String editar(Cliente cliente, String actualCpf) {

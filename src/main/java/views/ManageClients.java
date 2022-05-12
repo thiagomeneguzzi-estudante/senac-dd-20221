@@ -12,7 +12,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
-public class ManageClient extends JFrame {
+public class ManageClients extends JPanel {
 
     private JTextField nome;
     private JTextField cpf;
@@ -25,9 +25,8 @@ public class ManageClient extends JFrame {
     private Cliente cliente = new Cliente();
     private static final ClienteController clienteController = new ClienteController();
 
-    ManageClient(Cliente clientToEdit) {
-        setContentPane(panel);
-        setSize(750, 250);
+    ManageClients(Cliente clientToEdit) {
+        add(panel);
         findAddresses();
 
         comboBoxAddresses.setSelectedIndex(-1);
@@ -41,7 +40,6 @@ public class ManageClient extends JFrame {
                 String mensagem = clienteController.editar(cliente, clientToEdit.getCpf());
                 JOptionPane.showMessageDialog(null, mensagem, "Editar cliente", JOptionPane.INFORMATION_MESSAGE);
                 clearClientForm();
-                dispose();
             } else {
                 cliente.setNome(nome.getText());
                 cliente.setCpf(cpf.getText());
@@ -89,7 +87,10 @@ public class ManageClient extends JFrame {
             }
         });
 
-        showScreen(clientToEdit);
+        if(clientToEdit != null) {
+            setEditableClient(clientToEdit);
+        }
+
     }
 
     private void setEditableClient(Cliente clientToEdit) {
@@ -105,7 +106,7 @@ public class ManageClient extends JFrame {
     private void clearClientForm() {
         nome.setText("");
         cpf.setText("");
-        comboBoxAddresses.setSelectedItem(-1);
+        comboBoxAddresses.setSelectedItem(null);
     }
 
     private void findAddresses() {
@@ -114,12 +115,4 @@ public class ManageClient extends JFrame {
         }
     }
 
-    public void showScreen(Cliente clientToEdit){
-        this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        if(clientToEdit != null) {
-            setEditableClient(clientToEdit);
-        }
-        this.setVisible(true);
-    }
 }
