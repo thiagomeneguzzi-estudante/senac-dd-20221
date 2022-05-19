@@ -1,5 +1,13 @@
 CREATE SCHEMA `exemplos`;
 
+CREATE TABLE exemplos.cliente (
+      id int auto_increment primary key,
+      nome varchar(75)  not null,
+      cpf varchar(11) not null,
+      idEndereco int,
+      foreign key (idEndereco) references exemplos.telefone (id)
+)
+
 CREATE TABLE `exemplos`.`endereco` (
 `id` INT NOT NULL AUTO_INCREMENT,
 `rua` VARCHAR(75) NOT NULL,

@@ -23,8 +23,6 @@ g
 7src/main/java/controller/LinhaTelefonicaController.java,4\b\4b88131501610369d57895c9c769c5532e33c786
 _
 /src/main/java/model/dao/LinhaTelefonicaDAO.java,5\c\5c5d9c1b61027090c63304faa456a0338ec4dd61
-O
-src/main/java/utils/scripts.sql,b\9\b9e878d1d59265b2695c7e4db0c4d855eb41911b
 a
 1src/main/java/views/AssociateClientWithPhone.java,d\b\dbf615202073702527e047e80044ec8d20455436
 _
