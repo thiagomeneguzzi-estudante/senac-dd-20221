@@ -5,8 +5,6 @@ W
 'src/main/java/model/entity/Cliente.java,d\3\d3a030eced404c146911b8f79635d25c9cf02eca
 _
 /src/main/java/model/entity/LinhaTelefonica.java,f\b\fb4276aa2a11b8114fc49a66c68a56605b74bed8
-7
-pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
 X
 (src/main/java/model/dao/EnderecoDAO.java,0\a\0a34050aae44e842c9d80d4abf453fc8d47901ce
 R
@@ -31,8 +29,6 @@ T
 $src/main/java/views/AddressList.java,f\a\fa34ab1b295c56ecb3588019ecf4c27270d82792
 T
 $src/main/java/views/AddressList.form,3\8\381764a6e81dd1d76bded0b9b935ea313e952a41
-G
-src/main/java/Main.java,e\4\e44a8606ce010ad9b89aafdfcee2ab49afbf6d10
 V
 &src/main/java/views/ManageClients.java,0\b\0bd6cb311f0561500920348de9b43a16a669944f
 V

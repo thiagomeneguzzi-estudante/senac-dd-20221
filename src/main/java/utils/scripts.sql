@@ -6,7 +6,7 @@ CREATE TABLE exemplos.cliente (
       cpf varchar(11) not null,
       idEndereco int,
       foreign key (idEndereco) references exemplos.telefone (id)
-)
+);
 
 CREATE TABLE `exemplos`.`endereco` (
 `id` INT NOT NULL AUTO_INCREMENT,

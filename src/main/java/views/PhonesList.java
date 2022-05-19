@@ -88,7 +88,6 @@ public class PhonesList extends JPanel {
 
         DefaultTableModel tableModel = new DefaultTableModel(new String[]{"ID", "DDI", "DDD", "Número", "Estado"}, 0);
         phonesTable.setModel(tableModel);
-        tableModel.addRow(new Object[]{"ID", "DDI", "DDD", "Número", "Estado"});
 
         for (Telefone telefone: telefones) {
             String active = "Desativado";
