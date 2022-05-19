@@ -20,8 +20,10 @@ public class MainView extends JFrame {
 
         JMenu clientMenu = new JMenu("Clientes");
         JMenu addressMenu = new JMenu("Endereços");
+        JMenu phoneMenu = new JMenu("Telefones");
         menuBar.add(clientMenu);
         menuBar.add(addressMenu);
+        menuBar.add(phoneMenu);
 
         JMenuItem clientListMenuItem = new JMenuItem("Lista de clientes");
         JMenuItem addClientMenuItem = new JMenuItem("Adicionar cliente");
@@ -33,6 +35,11 @@ public class MainView extends JFrame {
         addressMenu.add(addressListMenuItem);
         addressMenu.add(addAddressMenuItem);
 
+        JMenuItem phoneListMenuItem = new JMenuItem("Lista de telefones");
+//        JMenuItem addAddressMenuItem = new JMenuItem("Criar endereço");
+        phoneMenu.add(phoneListMenuItem);
+//        addressMenu.add(addAddressMenuItem);
+
         mainPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
         mainPanel.setLayout(new BorderLayout(0, 0));
         setContentPane(mainPanel);
@@ -41,6 +48,8 @@ public class MainView extends JFrame {
         addClientMenuItem.addActionListener(e -> createManageClientPanel(null));
 
         addressListMenuItem.addActionListener(e -> getAddressListPanel());
+
+        phoneListMenuItem.addActionListener(e -> getPhoneListPanel());
     }
 
     private void getClientsListPanel() {
@@ -68,6 +77,12 @@ public class MainView extends JFrame {
     private void getAddressListPanel() {
         AddressList addressList = new AddressList();
         setContentPane(addressList);
+        revalidate();
+    }
+
+    private void getPhoneListPanel() {
+        PhonesList phonesList = new PhonesList();
+        setContentPane(phonesList);
         revalidate();
     }
 

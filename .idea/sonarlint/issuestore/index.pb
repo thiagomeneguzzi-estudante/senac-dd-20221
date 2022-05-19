@@ -8,8 +8,6 @@ _
 7
 pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
 X
-(src/main/java/model/entity/Telefone.java,7\f\7f2e2a674cb18aab2d5be3426f087e741a761879
-X
 (src/main/java/model/dao/EnderecoDAO.java,0\a\0a34050aae44e842c9d80d4abf453fc8d47901ce
 R
 "src/main/java/model/dao/Banco.java,5\c\5c48acefab9f2c692698ed90396d08c0495c450e
@@ -25,3 +23,19 @@ g
 7src/main/java/controller/LinhaTelefonicaController.java,4\b\4b88131501610369d57895c9c769c5532e33c786
 _
 /src/main/java/model/dao/LinhaTelefonicaDAO.java,5\c\5c5d9c1b61027090c63304faa456a0338ec4dd61
+O
+src/main/java/utils/scripts.sql,b\9\b9e878d1d59265b2695c7e4db0c4d855eb41911b
+a
+1src/main/java/views/AssociateClientWithPhone.java,d\b\dbf615202073702527e047e80044ec8d20455436
+_
+/src/main/java/controller/ClienteController.java,2\d\2dd0ea23c04feaa8a65bcbe10634ff41d0f6dfa7
+T
+$src/main/java/views/AddressList.java,f\a\fa34ab1b295c56ecb3588019ecf4c27270d82792
+T
+$src/main/java/views/AddressList.form,3\8\381764a6e81dd1d76bded0b9b935ea313e952a41
+G
+src/main/java/Main.java,e\4\e44a8606ce010ad9b89aafdfcee2ab49afbf6d10
+V
+&src/main/java/views/ManageClients.java,0\b\0bd6cb311f0561500920348de9b43a16a669944f
+V
+&src/main/java/views/ManageClients.form,f\9\f953d661c94992af398eb3a414a8fbe227c8c94b

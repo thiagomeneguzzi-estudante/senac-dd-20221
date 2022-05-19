@@ -1,6 +1,7 @@
 package model.dao;
 
 import model.entity.Telefone;
+import selector.PhoneSelector;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -174,4 +175,75 @@ public class TelefoneDAO {
         return retorno;
     }
 
+    public ArrayList<Telefone> buscarTodosComFiltro(PhoneSelector phoneSelector) {
+        Connection conexao = Banco.getConnection();
+        String sql = "SELECT * FROM TELEFONE";
+        Statement stmt = Banco.getStatement(conexao);
+
+        if(phoneSelector.temFiltro()) {
+            sql = createQueryWithFilter(phoneSelector, sql);
+        }
+
+        ArrayList<Telefone> telefones = new ArrayList<Telefone>();
+
+        try {
+            assert stmt != null;
+            ResultSet resultado = stmt.executeQuery(sql);
+            while(resultado.next()) {
+                Telefone telefone = new Telefone();
+
+                telefone.setId(resultado.getInt(1));
+                telefone.setDdd(resultado.getString(2));
+                telefone.setNumero(resultado.getString(3));
+                telefone.setTipo(resultado.getInt(4));
+                telefone.setAtivo(resultado.getBoolean(5));
+                telefone.setDdi(resultado.getString(6));
+
+                telefones.add(telefone);
+            }
+
+        } catch (SQLException e) {
+            System.out.println("Erro ao buscar todos os telefones: "+ e.getMessage());
+        } finally {
+            Banco.closeStatement(stmt);
+            Banco.closeConnection(conexao);
+        }
+
+        return telefones;
+    }
+
+    private String createQueryWithFilter(PhoneSelector phoneSelector, String sql) {
+
+        sql += " WHERE ";
+        boolean first = true;
+
+        if ((phoneSelector.getDdi() != null) && (phoneSelector.getDdi().trim().length() > 0)) {
+            if (!first) {
+                sql += " AND ";
+            }
+            sql += "ddi LIKE '%" + phoneSelector.getDdi() + "%'";
+            first = false;
+        }
+
+        if ((phoneSelector.getDdd() != null) && (phoneSelector.getDdd().trim().length() > 0)) {
+            if (!first) {
+                sql += " AND ";
+            }
+            sql += "ddd like '%" + phoneSelector.getDdd() + "%'";
+            first = false;
+        }
+
+        if (phoneSelector.getEstado().equalsIgnoreCase("ativado") || phoneSelector.getEstado().equalsIgnoreCase("desativado")) {
+            String active = phoneSelector.getEstado().equalsIgnoreCase("ativado") ? "1" : "0";
+            if (!first) {
+                sql += " AND ";
+            }
+
+            sql += "ativo = " + active ;
+            first = false;
+        }
+
+        return sql;
+
+    }
 }

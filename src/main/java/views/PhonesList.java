@@ -1,8 +1,8 @@
 package views;
 
 import controller.TelefoneController;
-import model.entity.Cliente;
 import model.entity.Telefone;
+import selector.PhoneSelector;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -11,26 +11,30 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-public class PhonesList extends JFrame{
+public class PhonesList extends JPanel {
     private JPanel panel1;
     private JButton adicionarTelefoneButton;
     private JButton atualizarTabelaButton;
     private JTable phonesTable;
     private JButton deletarTelefoneButton;
     private JButton editarTelefoneButton;
+    private JTextField ddiFilter;
+    private JTextField stateFilter;
+    private JTextField dddFilter;
+    private JButton filtrarButton;
 
     private TelefoneController telefoneController = new TelefoneController();
     private ArrayList<Telefone> telefones;
 
     PhonesList() {
-        setContentPane(panel1);
+        add(panel1);
         setSize(550, 350);
         setMinimumSize(new Dimension(550, 250));
         phonesTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         editarTelefoneButton.setEnabled(false);
         deletarTelefoneButton.setEnabled(false);
 
-        criarLista();
+        criarLista(null);
 
         phonesTable.addMouseListener(new MouseAdapter() {
             @Override
@@ -50,7 +54,16 @@ public class PhonesList extends JFrame{
         adicionarTelefoneButton.addActionListener(e -> addNewPhone());
         deletarTelefoneButton.addActionListener(e -> deletePhone());
         editarTelefoneButton.addActionListener(e -> editPhone());
-        atualizarTabelaButton.addActionListener(e -> criarLista());
+        atualizarTabelaButton.addActionListener(e -> criarLista(null));
+
+        filtrarButton.addActionListener(e -> {
+            PhoneSelector phoneSelector = new PhoneSelector();
+            phoneSelector.setDdi(ddiFilter.getText());
+            phoneSelector.setDdd(dddFilter.getText());
+            phoneSelector.setEstado(stateFilter.getText());
+
+            criarLista(phoneSelector);
+        });
 
     }
 
@@ -66,8 +79,13 @@ public class PhonesList extends JFrame{
         JOptionPane.showMessageDialog(null, "Método ainda não implementado", "Informação", JOptionPane.INFORMATION_MESSAGE);
     }
 
-    private void criarLista() {
-        telefones = telefoneController.buscarTodos();
+    private void criarLista(PhoneSelector phoneSelector) {
+        if(phoneSelector != null) {
+            telefones = telefoneController.buscarTodosComFiltro(phoneSelector);
+        } else {
+            telefones = telefoneController.buscarTodos();
+        }
+
         DefaultTableModel tableModel = new DefaultTableModel(new String[]{"ID", "DDI", "DDD", "Número", "Estado"}, 0);
         phonesTable.setModel(tableModel);
         tableModel.addRow(new Object[]{"ID", "DDI", "DDD", "Número", "Estado"});
@@ -81,10 +99,4 @@ public class PhonesList extends JFrame{
         }
     }
 
-    public static void showScreen() {
-        PhonesList phonesList = new PhonesList();
-        phonesList.setLocationRelativeTo(null);
-        phonesList.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        phonesList.setVisible(true);
-    }
 }
